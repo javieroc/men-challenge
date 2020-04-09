@@ -7,7 +7,6 @@ import { isAuthorized } from '../middlewares/common/isAuthorized';
 const {
   validateTitle,
   validateBody: validatePostBody,
-  validateAuthorExists,
   validateId,
 } = postValidations;
 
@@ -16,11 +15,7 @@ const { createPost, findAllPosts, findPostById } = postMiddlewares;
 
 const postRouter = express.Router();
 
-const createPostValidations = [
-  validateTitle,
-  validatePostBody,
-  validateAuthorExists,
-];
+const createPostValidations = [validateTitle, validatePostBody];
 
 const createPostMiddleware = validateBody(createPostValidations);
 postRouter.post('/', isAuthorized, createPostMiddleware, createPost);
